@@ -8,4 +8,4 @@ npm test
 tag=`npm version $v`
 echo "publishing $tag"
 # git push && git push --tags
-# npm publish --tag $tag
+npm publish --tag $tag
