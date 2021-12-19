@@ -1,0 +1,6 @@
+index.ts
+tsconfig.json
+.gitignore
+.npmignore
+/test
+/node_modules
