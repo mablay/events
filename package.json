@@ -2,7 +2,7 @@
   "name": "@occami/events",
   "version": "0.1.13",
   "description": "simplified dependency free ES6 version of NodeJS events",
-  "main": "lib/index.js",
+  "main": "index.js",
   "type": "module",
   "engines": {
     "node": ">=8"
