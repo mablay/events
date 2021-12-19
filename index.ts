@@ -14,6 +14,10 @@ export class EventEmitter {
     return this
   }
 
+  /** Alias for addListener */
+  on (eventName:string, listener:Listener):EventEmitter {
+    return this.addListener(eventName, listener)
+  }
   once (eventName:string, listener:Listener):EventEmitter {
     const listeners = this.listeners.get(eventName) || []
     const fn = (...args:any[]) => {
