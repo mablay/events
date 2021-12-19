@@ -2,6 +2,8 @@ declare type Listener = (...args: any[]) => void;
 export declare class EventEmitter {
     private listeners;
     addListener(eventName: string, listener: Listener): EventEmitter;
+    /** Alias for addListener */
+    on(eventName: string, listener: Listener): EventEmitter;
     once(eventName: string, listener: Listener): EventEmitter;
     emit(eventName: string, ...args: any[]): boolean;
     removeListener(eventName: string, listener: Listener): EventEmitter;
@@ -12,4 +14,3 @@ export declare class EventEmitter {
     listenerCount(eventName: string): number;
 }
 export {};
-//# sourceMappingURL=index.d.ts.map
