@@ -1,0 +1,30 @@
+{
+  "name": "@occami/events",
+  "version": "0.1.0",
+  "description": "simplified dependency free ES6 version of NodeJS events",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {},
+  "devDependencies": {
+    "pta": "^1.0.2",
+    "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "pta"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mablay/events.git"
+  },
+  "keywords": [
+    "events",
+    "es6"
+  ],
+  "author": "marc.ablay@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mablay/events/issues"
+  },
+  "homepage": "https://github.com/mablay/events#readme"
+}

@@ -2,5 +2,6 @@ index.ts
 tsconfig.json
 .gitignore
 .npmignore
+.github
 /test
 /node_modules
