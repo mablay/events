@@ -30,3 +30,19 @@ eventNames(): string[]
 listenerCount(eventName: string): number
 ```
 Behaviour as specified in NodeJS [EventEmitter](https://nodejs.org/api/events.html)
+
+See [events](https://www.npmjs.com/package/events) if you're missing out functionality from the original spec.
+
+---
+
+## What is Occami?
+
+A collection of modules with these characteristics:
+
+* as simple as possible
+* few dependencies (mostly none)
+* easy to read & review
+* small footprint
+* require an ES6 compliant runtime
+* not minified, assuming you're bundling anyways
+* type definitions included
