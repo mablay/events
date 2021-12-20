@@ -5,3 +5,6 @@ node_modules
 *.js.map
 *.js
 !*.spec.js
+.vscode
+/coverage
+*.log
