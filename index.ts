@@ -25,6 +25,8 @@ export class EventEmitter {
       this.removeListener(eventName, fn)
       listener(...args)
     }
+    // fn obscures the actual listener from .removeListener()
+    fn.$onceFn = listener // identifier for .removeListener()
     listeners.push(fn)
     this.listeners.set(eventName, listeners)
     return this
@@ -43,7 +45,8 @@ export class EventEmitter {
 
   removeListener (eventName:string, listener:Listener):EventEmitter {
     const listeners = this.listeners.get(eventName) || []
-    const index = listeners.findIndex(fn => fn === listener)
+    // @ts-ignore
+    const index = listeners.findIndex(fn => fn === listener || fn.$onceFn === listener)
     if (~index) listeners.splice(index, 1)
     if (listeners.length === 0) this.listeners.delete(eventName)
     this.emit('removeListener', eventName, listener)

@@ -63,3 +63,29 @@ test('newListener event gets emitted before new listener is added', t => {
   })
   ee.emit('event')
 })
+
+test('removeListener', t => {
+  const ee = new EventEmitter()
+  let foo = 0
+  const fn = () => foo++
+  ee.once('foo', fn)
+  ee.removeListener('foo', fn)
+  ee.emit('foo')
+  t.equal(foo, 0, 'do not execute removed listeners')
+  t.equal(ee.listenerCount('foo'), 0, 'counting no listeners once they are all removed')
+  t.equal(ee.eventNames(), [], 'eventName removed once all listeners are removed')
+  t.equal(ee.removeListener('bar', fn), ee)
+})
+
+test('removeAllListeners', t => {
+  const ee = new EventEmitter()
+  let foo = 0
+  ee.once('foo', () => foo++)
+  ee.on('foo', () => foo++)
+  ee.removeAllListeners('foo')
+  ee.emit('foo')
+  t.equal(foo, 0, 'do not execute removed listeners')
+  t.equal(ee.listenerCount('foo'), 0, 'counting no listeners once they are all removed')
+  t.equal(ee.eventNames(), [], 'eventName removed once all listeners are removed')
+  t.equal(ee.removeAllListeners('bar'), ee)
+})
