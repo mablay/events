@@ -35,3 +35,31 @@ test('once', t => {
   t.equal(foo, 1, 'do not execute once-listener on second emit')
   t.equal(ee.eventNames().length, 0, 'once-listener gets removed after use')
 })
+
+test('newListener event gets emitted before new listener is added', t => {
+  const ee = new EventEmitter()
+  let foo = 0
+  ee.once('newListener', () => {
+    ee.on('event', () => {
+      t.equal(++foo, 1, 'newListener callback is executed before listener is added')
+    })
+  })
+  ee.on('event', () => {
+    t.equal(++foo, 2, 'event callback is added after newListener event is called')    
+  })
+  ee.emit('event')
+})
+
+test('newListener event gets emitted before new listener is added', t => {
+  const ee = new EventEmitter()
+  let foo = 0
+  ee.once('newListener', () => {
+    ee.on('event', () => {
+      t.equal(++foo, 1, 'newListener callback is executed before listener is added')
+    })
+  })
+  ee.on('event', () => {
+    t.equal(++foo, 2, 'event callback is added after newListener event is called')    
+  })
+  ee.emit('event')
+})

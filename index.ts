@@ -8,6 +8,7 @@ export class EventEmitter {
   private listeners = new Map<string,Listener[]>()
 
   addListener (eventName:string, listener:Listener):EventEmitter {
+    this.emit('newListener', eventName, listener)
     const listeners = this.listeners.get(eventName) || []
     listeners.push(listener)
     this.listeners.set(eventName, listeners)
@@ -32,7 +33,9 @@ export class EventEmitter {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   emit (eventName:string, ...args:any[]):boolean {
     const listeners = this.listeners.get(eventName) || []
-    for (const listener of listeners) {
+    // using .slice for shallow copy to ensure that all event listeners are called
+    // even if the listeners array is modified by on of the callbacks
+    for (const listener of listeners.slice()) {
       listener(...args)
     }
     return listeners.length > 0
@@ -43,6 +46,7 @@ export class EventEmitter {
     const index = listeners.findIndex(fn => fn === listener)
     if (~index) listeners.splice(index, 1)
     if (listeners.length === 0) this.listeners.delete(eventName)
+    this.emit('removeListener', eventName, listener)
     return this
   }
 
@@ -52,7 +56,11 @@ export class EventEmitter {
   }
 
   removeAllListeners (eventName:string):EventEmitter {
-    this.listeners.delete(eventName)
+    const listeners = this.listeners.get(eventName) || []
+    // loop through the list to emit 'removeListener' on each removal
+    for (const listener of listeners.slice()) {
+      this.removeListener(eventName, listener)
+    }
     return this
   }
 
