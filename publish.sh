@@ -8,7 +8,7 @@ echo "Please review the packlist before publishing..."
 echo ""
 npx npm-packlist
 echo ""
-read -p "Confirm packlist? (y/N)" yn
+read -p "Confirm packlist? (y/N) " yn
 case $yn in
   [Yy]* ) echo "packlist confirmed";;
   * ) echo "packlist rejected"; exit;;
