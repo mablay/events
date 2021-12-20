@@ -8,3 +8,6 @@ publish.sh
 *.ts
 !*.d.ts
 *.map
+.vscode
+/coverage
+*.log
